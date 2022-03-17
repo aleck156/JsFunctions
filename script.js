@@ -132,10 +132,69 @@ const high5 = function (arg1) {
   console.log(`High 5 to ${arg1}`);
 };
 
-document.body.addEventListener('click', high5);
+// document.body.addEventListener('click', high5);
 
 ['Jonas', 'Martha', 'Adam'].forEach(high5);
 
 // CALLBACK FUNCTIONS ALLOW TO CREATE ABSTRACTION
 // hiding details from the users
 //
+
+// ------------------------------------------
+// RETURNING NEW FUNCTIONS
+const greet = function (greeting) {
+  return function (name) {
+    console.log(`${greeting} ${name}`);
+  };
+};
+
+const greeterHey = greet(`hey`);
+greeterHey('malow');
+
+// CLOSURES - HARD AN IMPORTANT!
+greeterHey('Thomas');
+greeterHey('Steven');
+
+greet('Hello, ')('Michael');
+
+// the same as above, but using arrow functions
+
+const greet2 = greeting => name => console.log(`${greeting} ${name}`);
+
+greet2('Hello 2, ')('Michael 2');
+
+// ------------------------------------------
+// 133. CALL AND APPLY METHODS
+// functions are objects
+// objects have methods attached to them
+// thus. we can call methods on functions
+
+const lufthansa = {
+  airline: 'Lufthansa',
+  iataCode: 'LH',
+  bookings: [],
+  // enhanced object literals syntax
+  book(flightNum, name) {
+    this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name });
+    console.log(
+      `${name} booked a seat on a ${this.airline} flight ${this.iataCode}${flightNum}`
+    );
+  },
+};
+
+lufthansa.book(239, 'Thomas Anderson');
+lufthansa.book(635, 'John Smith');
+console.log(lufthansa.bookings);
+
+const eurowings = {
+  name: 'Eurowings',
+  iataCode: 'EW',
+  bookings: [],
+};
+
+const book = lufthansa.book;
+
+// does not work
+// book(23, 'tiger');
+book.call(eurowings, 23, 'Tiger Woods');
+console.log(eurowings);
