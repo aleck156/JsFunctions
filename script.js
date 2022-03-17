@@ -196,5 +196,92 @@ const book = lufthansa.book;
 
 // does not work
 // book(23, 'tiger');
+
+// manually setting 'this' context
+// call, apply, bind
 book.call(eurowings, 23, 'Tiger Woods');
 console.log(eurowings);
+
+book.call(lufthansa, 239, 'Mary Jane Anderson');
+console.log(lufthansa);
+
+lufthansa.book.call(eurowings, 999, 'Wake up, neo ...');
+
+console.log(eurowings);
+
+const swiss = {
+  name: 'Swiss Air Lines',
+  iataCode: 'LX',
+  bookings: [],
+};
+
+book.call(swiss, 583, 'Mary Cooper Janis');
+console.log(swiss.bookings);
+
+// APPLY
+// does exactly the same thing
+// after the thisArg, it takes an array of arguments
+// rarely used in modern JS -> use call() and spread out the arguments from the array
+book.apply(swiss, [584, 'Mary Cooper Janis Jr.']);
+console.log(swiss.bookings);
+
+// ------------------------------------------
+// 134. BIND METHOD
+// returns new function, where thisArg is bound with the argument
+// we can bind with more than just thisArg
+// i.e. binding function arguments!
+
+// partial application patterns
+// some parameters are already predefined
+// more flexible than just default values
+
+const bookEW = book.bind(eurowings);
+const bookLH = book.bind(lufthansa);
+const bookLX = book.bind(swiss);
+
+bookEW('431', 'Mick Jaeger');
+console.log(eurowings);
+
+const bookEW23 = book.bind(eurowings, 23);
+bookEW23('Aerosmith!');
+console.log(eurowings);
+
+// OBJECTS + EVENT LISTENERS
+// 'this' keyword is set dynamically
+const btnBuy = document.querySelector('.buy');
+
+lufthansa.planes = 300;
+lufthansa.buyPlane = function () {
+  console.log(this);
+  this.planes++;
+  console.log(this.planes);
+};
+
+// this does NOT WORK PROPERLY
+// btnBuy.addEventListener('click', lufthansa.buyPlane);
+
+// fixing it
+// btnBuy.addEventListener('click', () => lufthansa.buyPlane());
+btnBuy.addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
+// .bind() returns a new function, that will be called by event handler
+
+// partial application
+// preset some of the parameters
+// the order of presetted arguments DO MATTER
+// BE CAREFUL HERE!
+const addTax = (rate, value) => value * (1 + rate / 100);
+console.log(addTax(10, 200));
+
+const addVAT = addTax.bind(undefined, 23);
+
+console.log(addVAT(700));
+
+const addTaxRate = function (rate) {
+  return function (value) {
+    return value * (1 + rate / 100);
+  };
+};
+
+const addVAT2 = addTaxRate(23);
+
+console.log(addVAT2(100));
