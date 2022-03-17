@@ -77,3 +77,65 @@ checkIn(flight, jonas);
 // functions are simply values
 // functions are just another type of object
 // functions are treated as values
+// we can store functions in variables or properties
+// pass functions as arguments to OTHER functions
+
+// since functions are objects, and we can call methods on objects ...
+// there are methods we can call on our functions too!
+
+// ------------------------------------------
+// HIGHER ORDER FUNCTION
+
+// receives another function as an argument
+// returns a new function
+// ... or both xD
+
+// all of that possible only because of first-class functions
+// btn.addEventListener() is an example of HOF, where the second argument is a so-called callback function, which is being executed inside the body of HOF later, based on teh code
+
+function count() {
+  let counter = 0;
+  return function () {
+    counter++;
+  };
+}
+
+// FIRST-CLASS FUNCTIONS vs HIGHER-ORDER FUNCTIONS (FCF vs HOF)
+// FCF - a feature of a programming language, all functions are values, it's just a concept
+// HOF - possible when a programming language supports FCF
+
+// low level functions
+const oneWord = function (str) {
+  return str.replace(/ /g, '').toLowerCase();
+};
+
+const upperFirstWord = function (str) {
+  const [firstWord, ...others] = str.split(' ');
+  return [firstWord.toUpperCase(), ...others].join(' ');
+};
+
+// HOF
+// higher order function
+// does not care how the supportive functions do their jobs, as long as they do it right
+const transformer = function (str, fn) {
+  console.log(`1. Original string: ${str}`);
+  console.log(`2. Transformed string: ${fn(str)}`);
+  console.log(`3. Transformed by: ${fn.name}`);
+  // return fn(str);
+};
+
+transformer('testing HOF JavaScript stuff', upperFirstWord);
+transformer('testing HOF JavaScript stuff', oneWord);
+
+// Js callbacks all the time!
+const high5 = function (arg1) {
+  console.log(`High 5 to ${arg1}`);
+};
+
+document.body.addEventListener('click', high5);
+
+['Jonas', 'Martha', 'Adam'].forEach(high5);
+
+// CALLBACK FUNCTIONS ALLOW TO CREATE ABSTRACTION
+// hiding details from the users
+//
