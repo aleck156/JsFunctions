@@ -31,7 +31,7 @@ const poll = {
   },
 
   registerNewAnswer(type) {
-    const userInput = this.displayPrompt(this.question, this.options);
+    const userInput = this.displayPrompt();
     updateAnswersPoll(userInput);
     this.dispalyResults(type);
   },
