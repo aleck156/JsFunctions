@@ -18,7 +18,9 @@ const displayPrompt = function () {
 };
 
 const updateAnswers = function (num) {
-  this.answers ? this.answers[num]++ : (this.answers[num] = 1);
+  num >= 0 && num < this.answers.length
+    ? this.answers[num]++
+    : console.log(`Number ${num} is out of bounds, nothing changed`);
 };
 
 const poll = {
