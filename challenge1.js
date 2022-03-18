@@ -7,12 +7,6 @@
 
 const btn = document.querySelector('.poll');
 
-const updateAnswers = function (num) {
-  num >= 0 && num < this.answers.length
-    ? this.answers[num]++
-    : console.log(`Number ${num} is out of bounds, nothing changed`);
-};
-
 const poll = {
   question: 'What is your favourite programming language?',
   options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
@@ -30,9 +24,14 @@ const poll = {
     return Number(userInput);
   },
 
+  updateAnswers(num) {
+    num >= 0 && num < this.answers.length
+      ? this.answers[num]++
+      : console.log(`Number ${num} is out of bounds, nothing changed`);
+  },
   registerNewAnswer(type) {
     const userInput = this.displayPrompt();
-    updateAnswersPoll(userInput);
+    this.updateAnswers(userInput);
     this.dispalyResults(type);
   },
 
@@ -43,7 +42,7 @@ const poll = {
   },
 };
 
-const updateAnswersPoll = updateAnswers.bind(poll);
+// const updateAnswersPoll = updateAnswers.bind(poll);
 
 btn.addEventListener('click', poll.registerNewAnswer.bind(poll));
 
