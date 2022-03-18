@@ -303,3 +303,53 @@ const runOnce = function () {
 })();
 
 (() => console.log(`This will never run again #2`))();
+
+// ------------------------------------------
+// 137. CLOSURES
+// closures makes the function remember all the variables that existed at the function's birth place
+
+// ANY FUNCTION HAS THE ACCESS TO THE VARIABLE ENVIRONMENT OF EXECUTION CONTEXT IN WHICH THE FUNCTION WAS CREATED, EVEN AFTER THE EXECUTION CONTEXT IS GONE
+
+// CLOSURE: VARIABLE ENVIRONMENT ATTACHED TO THE FUNCTION, EXACTLY AS IT WAS AT THE TIME AND PLACE THE FUNCTION WAS CREATED
+
+// the scope is being preserved through the closure
+// it stays with the function forever
+// the closure has priority over the scope chain
+// closures are created automatically
+// we have no direct access to closures!
+// it's an internal property of a function
+// it's a feature used ALL THE TIME
+// MASTER CLOSURES TO BE A PROFESSIONAL DEVELOPER
+
+// double brackets like [[Scopes]] mean internal property that we, the developers, have no access to
+
+/* CLOSURE - DEFINITION
+
++ A closure is the closed-over variable environment of the execution context in which a function was created, even after that execution context is gone
+
++ A closure gives a function access to all the variables of its parents function, even after that parent function has returned. The function keeps a reference to its outer scope, which preserves the scope chain throughout time.
+
++ A closure makes sure that a function doesn't loose connection to variables that existed at the function;s birth place
+
++ A closure is like a backpack that a function carries around wherever it goes. This backpack has all the variables that were present in the environment where the function was created.
+*/
+console.log(`--- 137. CLOSURES ---`);
+
+const secureBooking = function () {
+  let passengerCount = 0;
+
+  return function () {
+    passengerCount++;
+    console.log(`${passengerCount} passengers`);
+  };
+};
+
+const booker = secureBooking();
+
+booker();
+booker();
+booker();
+booker();
+booker();
+
+console.dir(booker);
