@@ -54,3 +54,8 @@ const testData2 = [1, 5, 3, 9, 6, 1];
 
 const type1 = 'string';
 const type2 = 'array';
+
+poll.dispalyResults.bind({ answers: testData1 })(type1);
+poll.dispalyResults.bind({ answers: testData1 })(type2);
+poll.dispalyResults.bind({ answers: testData2 })(type1);
+poll.dispalyResults.bind({ answers: testData2 })(type2);
