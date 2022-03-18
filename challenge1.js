@@ -5,6 +5,8 @@
 
 */
 
+const btn = document.querySelector('.poll');
+
 const displayPrompt = function () {
   const userInput = prompt(`What is your favourite programming language?
   0: JavaScript
@@ -35,6 +37,9 @@ const poll = {
 const testData1 = [5, 2, 3];
 const testData2 = [1, 5, 3, 9, 6, 1];
 
-// poll.registerNewAnswer();
 const updateAnswersPoll = updateAnswers.bind(poll);
-poll.registerNewAnswer();
+
+btn.addEventListener('click', poll.registerNewAnswer.bind(poll));
+
+// poll.registerNewAnswer();
+// poll.registerNewAnswer();
