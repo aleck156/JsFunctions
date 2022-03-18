@@ -285,3 +285,21 @@ const addTaxRate = function (rate) {
 const addVAT2 = addTaxRate(23);
 
 console.log(addVAT2(100));
+
+// ------------------------------------------
+// 136. IMMEDIATELY INVOKED FUNCTION EXPRESSIONS - IIFE
+// disappears once it'b being calles
+// useful for async/await
+// functions create scope
+
+const runOnce = function () {
+  console.log(`This will never run again`);
+};
+
+// runOnce();
+
+(function () {
+  console.log(`This will never run again #1`);
+})();
+
+(() => console.log(`This will never run again #2`))();
