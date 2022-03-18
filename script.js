@@ -321,6 +321,8 @@ const runOnce = function () {
 // it's a feature used ALL THE TIME
 // MASTER CLOSURES TO BE A PROFESSIONAL DEVELOPER
 
+// CLOSURES HAVE PRIORITY OVER SCOPE CHAIN
+
 // double brackets like [[Scopes]] mean internal property that we, the developers, have no access to
 
 /* CLOSURE - DEFINITION
@@ -353,3 +355,51 @@ booker();
 booker();
 
 console.dir(booker);
+
+// ------------------------------------------
+// 138. EXAMPLES - CLOSURES
+
+let f;
+
+const g = function () {
+  const a = 23; // it's inside the backpack, closure, of f function
+  f = function () {
+    console.log(a * 2);
+  };
+};
+
+const h = function () {
+  const b = 777;
+  f = function () {
+    console.log(b * 3);
+  };
+};
+
+// console.log(f);
+g();
+f();
+console.dir(f);
+
+h();
+f();
+console.dir(f);
+
+// example 2
+const boardPassengers = function (n, waitTime) {
+  const perGroup = n / 3; // comeent this out to use variable from global scope
+
+  // this function was executed completely independent of boardPassengers
+  // still, it had access to variables that were present in boardPassengers at the moment of creating that callback
+  setTimeout(function () {
+    console.log(`We are now boarding all ${n} passengers`);
+    console.log(`There are 3 groups, each with ${perGroup} passengers`);
+  }, waitTime * 1000);
+
+  console.log(`Will start boarding in ${waitTime} seconds`);
+};
+
+boardPassengers(180, 10);
+
+// proof that closure has priority over scope chain
+const perGroup = 1000;
+boardPassengers(180, 3);
