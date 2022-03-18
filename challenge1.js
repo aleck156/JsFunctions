@@ -29,15 +29,24 @@ const poll = {
   // This generates [0, 0, 0, 0]. More in the next section!
   answers: new Array(4).fill(0),
 
-  registerNewAnswer() {
+  registerNewAnswer(type) {
     const userInput = displayPrompt();
     updateAnswersPoll(userInput);
-    console.log(this.answers);
+    this.dispalyResults(type);
+  },
+
+  dispalyResults(type = 'array') {
+    type === 'string'
+      ? console.log(`Poll results are ${this.answers.join(',')}.`)
+      : console.log(this.answers);
   },
 };
 
 const testData1 = [5, 2, 3];
 const testData2 = [1, 5, 3, 9, 6, 1];
+
+const type1 = 'string';
+const type2 = 'array';
 
 const updateAnswersPoll = updateAnswers.bind(poll);
 
