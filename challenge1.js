@@ -40,6 +40,10 @@ const poll = {
       ? console.log(`Poll results are ${this.answers.join(',')}.`)
       : console.log(this.answers);
   },
+
+  clearAnswers() {
+    this.answers = new Array(4).fill(0);
+  },
 };
 
 // const updateAnswersPoll = updateAnswers.bind(poll);
@@ -58,3 +62,5 @@ poll.dispalyResults.bind({ answers: testData1 })(type1);
 poll.dispalyResults.bind({ answers: testData1 })(type2);
 poll.dispalyResults.bind({ answers: testData2 })(type1);
 poll.dispalyResults.bind({ answers: testData2 })(type2);
+
+poll.clearAnswers();
