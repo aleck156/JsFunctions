@@ -42,15 +42,14 @@ const poll = {
   },
 };
 
+const updateAnswersPoll = updateAnswers.bind(poll);
+
+btn.addEventListener('click', poll.registerNewAnswer.bind(poll));
+
+// BONUS
+
 const testData1 = [5, 2, 3];
 const testData2 = [1, 5, 3, 9, 6, 1];
 
 const type1 = 'string';
 const type2 = 'array';
-
-const updateAnswersPoll = updateAnswers.bind(poll);
-
-btn.addEventListener('click', poll.registerNewAnswer.bind(poll));
-
-// poll.registerNewAnswer();
-// poll.registerNewAnswer();
