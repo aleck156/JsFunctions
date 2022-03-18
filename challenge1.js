@@ -29,10 +29,12 @@ const poll = {
       ? this.answers[num]++
       : console.log(`Number ${num} is out of bounds, nothing changed`);
   },
-  registerNewAnswer(type) {
+
+  registerNewAnswer() {
     const userInput = this.displayPrompt();
     this.updateAnswers(userInput);
-    this.dispalyResults(type);
+    this.dispalyResults();
+    this.dispalyResults('string');
   },
 
   dispalyResults(type = 'array') {
@@ -51,16 +53,18 @@ const poll = {
 btn.addEventListener('click', poll.registerNewAnswer.bind(poll));
 
 // BONUS
-
+// this is what user typed in
 const testData1 = [5, 2, 3];
 const testData2 = [1, 5, 3, 9, 6, 1];
 
 const type1 = 'string';
 const type2 = 'array';
 
-poll.dispalyResults.bind({ answers: testData1 })(type1);
-poll.dispalyResults.bind({ answers: testData1 })(type2);
-poll.dispalyResults.bind({ answers: testData2 })(type1);
-poll.dispalyResults.bind({ answers: testData2 })(type2);
+const registerNewAnswer = poll.registerNewAnswer.bind(poll);
+
+// poll.dispalyResults.bind({ answers: testData1 })(type1);
+// poll.dispalyResults.bind({ answers: testData1 })(type2);
+// poll.dispalyResults.bind({ answers: testData2 })(type1);
+// poll.dispalyResults.bind({ answers: testData2 })(type2);
 
 poll.clearAnswers();
