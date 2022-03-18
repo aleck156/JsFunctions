@@ -7,16 +7,6 @@
 
 const btn = document.querySelector('.poll');
 
-const displayPrompt = function () {
-  const userInput = prompt(`What is your favourite programming language?
-  0: JavaScript
-  1: Python
-  2: Rust
-  3: C++
-  (Write option number): `);
-  return Number(userInput);
-};
-
 const updateAnswers = function (num) {
   num >= 0 && num < this.answers.length
     ? this.answers[num]++
@@ -29,8 +19,19 @@ const poll = {
   // This generates [0, 0, 0, 0]. More in the next section!
   answers: new Array(4).fill(0),
 
+  displayPrompt() {
+    let optionsStr = '';
+    for (const opt of this.options) {
+      optionsStr += `\n${opt}`;
+    }
+    const userInput = prompt(
+      `${this.question}${optionsStr}\n(Write option number): `
+    );
+    return Number(userInput);
+  },
+
   registerNewAnswer(type) {
-    const userInput = displayPrompt();
+    const userInput = this.displayPrompt(this.question, this.options);
     updateAnswersPoll(userInput);
     this.dispalyResults(type);
   },
